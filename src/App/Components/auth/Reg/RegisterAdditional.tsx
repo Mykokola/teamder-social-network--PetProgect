@@ -30,7 +30,7 @@ export const RegisterAdditional: React.FC = () => {
         <RegisterInput placeholder="Social Media URL #3" type="text" />
         <RegisterNext to={"/register/interests"}>CONTINUE</RegisterNext>
         <AuthParagraf>
-          You already have an account? <SingUp to="/">Login</SingUp>
+          You already have an account? <SingUp to="/login">Login</SingUp>
         </AuthParagraf>
       </RegForm>
     </>

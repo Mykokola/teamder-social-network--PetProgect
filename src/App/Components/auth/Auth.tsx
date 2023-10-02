@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Login } from "./Login/Login";
-import { Register } from "./Reg/Register";
 import { RegisterInterests } from "./Reg/RegisterInterests";
 import {
   AuthContainer,
@@ -21,7 +20,7 @@ export const Auth: React.FC = () => {
         <AuthFormContainer>
           <AuthLogoImg src={formLogo} alt="" />
             <Routes>
-              <Route path="/" element={<Login />}></Route>
+              <Route path="/login" element={<Login />}></Route>
               <Route path="/register" element={<RegisterBasic></RegisterBasic>}>
               </Route>
               <Route path='/register/additional' element={<RegisterAdditional></RegisterAdditional>} > </Route>

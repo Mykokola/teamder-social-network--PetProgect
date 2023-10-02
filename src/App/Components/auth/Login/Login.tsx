@@ -12,7 +12,6 @@ import {
   SingUp,
   AuthFomr
 } from "../styles/auth.styled";
-import { NavLink } from 'react-router-dom';
 export const Login: React.FC = () => {
   return (
     <>

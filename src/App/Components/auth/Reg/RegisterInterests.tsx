@@ -183,7 +183,7 @@ export const RegisterInterests:React.FC = () => {
         </IteresContainer>
         <RegisterNext to={'/'}>SIGN UP!</RegisterNext>
     <AuthParagraf>
-          You already have an account? <SingUp to="/">Login</SingUp>
+          You already have an account? <SingUp to="/login">Login</SingUp>
             </AuthParagraf>
         </RegForm>
         </>
