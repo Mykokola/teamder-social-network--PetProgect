@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+export const NavMenuLinkNavigate = styled(NavLink)`
+display:flex;
+gap:5px;
 
+`
 export const LogoNav = styled(NavLink)`
   display: flex;
   align-items: center;

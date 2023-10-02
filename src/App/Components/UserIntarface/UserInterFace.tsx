@@ -6,12 +6,14 @@ import { Hastags } from "../hashtags/Heshatags";
 import { ProfilePage } from "../userProfile/MyProfilePage";
 import { UserIntarFaceContainer } from "./UserInterFace.styled";
 import { Chat } from "../Chat/Chat";
+import {FriendsList} from '../FriendsList/FriendsList'
 export const UserInterFace: React.FC = () => {
     return(
         <UserIntarFaceContainer>
         <NavMenu></NavMenu>
         <Routes>
             <Route path="/" element={<Home></Home>}></Route>
+            <Route path="/friends" element={<FriendsList></FriendsList>}></Route>
             <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
             <Route path="/chat" element={<Chat></Chat>}></Route>
         </Routes>
