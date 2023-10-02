@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  font-family: "Roboto", "Manrope" sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color:white;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+h1,h2,h3,h4,h5,h6,p,span{
+  padding: 0;
+  margin: 0;
+  color: #F2F2F2;
+}
+ul,li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+input{
+  border:none;
+  background-image:none;
+  background-color:transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline:none;
+}
+a{
+  color:white;
+  border:none;
+  text-decoration: none;
+  cursor:pointer;
+}
+button{
+  cursor: pointer;
+  border:none;
+}
