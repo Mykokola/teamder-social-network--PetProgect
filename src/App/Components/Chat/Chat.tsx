@@ -1,0 +1,76 @@
+import React from "react";
+import { ChatConitaner,MessageConiter,UserName,
+    Message,ChatIntarface,SendMassageContainer,SendMassageInput,
+    SendMassageBtn,ChatTitle} from "./Chat.styled";
+export const Chat:React.FC = () => {
+    return(
+        <ChatConitaner>
+            <ChatTitle>Write to your friends ;)</ChatTitle>
+            <ChatIntarface>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter> <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            <MessageConiter>
+                <UserName>Nick</UserName>
+                <Message>hahahaha</Message>
+            </MessageConiter>
+            </ChatIntarface>
+            <SendMassageContainer>
+                <SendMassageInput></SendMassageInput>
+                <SendMassageBtn>Send</SendMassageBtn>
+            </SendMassageContainer>
+        </ChatConitaner>
+    )
+}
