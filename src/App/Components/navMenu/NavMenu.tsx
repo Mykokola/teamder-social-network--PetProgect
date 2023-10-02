@@ -54,7 +54,7 @@ export const NavMenu: React.FC = () => {
                 fill="#F2F2F2"
               />
             </svg>{" "}
-            My teams
+            My friends
           </NavMenuItem>
           <NavMenuItem>
             {" "}

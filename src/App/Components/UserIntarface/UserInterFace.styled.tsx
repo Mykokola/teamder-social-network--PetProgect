@@ -8,4 +8,9 @@ padding-left: 12px;
     margin-left: auto;
     margin-right: auto;
     height: 100%;
+    display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-template-rows: repeat(4, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
 `

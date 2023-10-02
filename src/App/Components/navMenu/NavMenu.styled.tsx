@@ -32,7 +32,7 @@ color: #F2F2F2;
 export const NavMenuContainer = styled.div`
 height: 100%;
 position: relative;
-
+grid-area: 1 / 1 / 5 / 2;
 `
 export const LogOutBtn = styled.button`
 position: absolute;
