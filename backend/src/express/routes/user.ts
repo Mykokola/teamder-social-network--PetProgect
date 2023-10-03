@@ -1,15 +1,9 @@
+import registerUser from "../../api/usersAuth";
 const express = require("express");
 const router = express.Router();
+const handlerError = require('../../middlewears/handlerError')
+router.post('/register',registerUser)
 
-router.get('/login',async (req,res,next) => {
-    try{
-    
-      res.status(200).json({
-        message: "Verification email sent",
-      });
-    }catch(e){
-        console.log(e)
-    }
-  })
+router.use(handlerError)
 
 module.exports = router
