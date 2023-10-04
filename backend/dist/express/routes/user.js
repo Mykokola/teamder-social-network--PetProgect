@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { auth } = require('../../middlewears/auth');
 const handlerError = require('../../middlewears/handlerError');
+router.get('/users', authService.getAllUsers);
 router.post('/register', authService.registerUser);
 router.post('/login', authService.loginUser);
 router.post('/logout', auth, authService.logoutUser);

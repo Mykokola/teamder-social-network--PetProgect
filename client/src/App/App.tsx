@@ -9,8 +9,8 @@ function App() {
   return (
     <>
 
-     {/* <Auth></Auth> */}
-    <UserInterFace></UserInterFace>
+     <Auth></Auth>
+    {/* <UserInterFace></UserInterFace> */}
  </>
   );
 }

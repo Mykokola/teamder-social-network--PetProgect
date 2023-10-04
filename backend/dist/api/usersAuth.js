@@ -16,6 +16,17 @@ const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
 const { JWT_SECRET } = require('../constants/envConstants');
 const jwt = require('jsonwebtoken');
+const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield userService.getAllUser();
+        res.status(200).json({
+            data: users
+        });
+    }
+    catch (e) {
+        next(e);
+    }
+});
 const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
@@ -98,6 +109,7 @@ module.exports = {
     registerUser,
     loginUser,
     logoutUser,
-    updateLike
+    updateLike,
+    getAllUsers
 };
 //# sourceMappingURL=usersAuth.js.map

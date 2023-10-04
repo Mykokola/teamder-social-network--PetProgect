@@ -7,6 +7,18 @@ const gravatar = require('gravatar')
 const {JWT_SECRET} = require('../constants/envConstants')
 const jwt = require('jsonwebtoken')
 
+const getAllUsers = async (req:Request,res:Response,next:NextFunction) => {
+try{
+    const users = await userService.getAllUser()
+    res.status(200).json({
+        data:users
+    })
+}catch(e){
+    next(e)
+}
+}
+
+
 const registerUser = async (req:Request,res:Response,next:NextFunction) => {
     try{
     const {email,password} = req.body
@@ -94,5 +106,6 @@ module.exports = {
     registerUser,
     loginUser,
     logoutUser,
-    updateLike
+    updateLike,
+    getAllUsers
 }
