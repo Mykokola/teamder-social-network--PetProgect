@@ -9,7 +9,7 @@ const passport = require("passport");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = (0, express_1.default)();
-const port = 3001;
+const port = 3000;
 const user = require('./express/routes/user');
 app.use(bodyParser.json());
 app.use(cors());
@@ -17,11 +17,6 @@ app.use(passport.initialize());
 app.use(cookieParser());
 app.use(express_1.default.json());
 app.use(express_1.default.static("public"));
-app.get('/api', (req, res, next) => {
-    res.json({
-        message: "hi Broooo"
-    });
-});
 app.use('/auth', user);
 app.use((req, res) => {
     res.status(404).json({ message: "Not found" });

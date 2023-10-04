@@ -10,4 +10,4 @@ const setupConection  = async () => {
 }
 }
 
-module.exports = setupConection
+export = setupConection

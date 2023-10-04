@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { User } from '../../types';
+import { User } from '../types/index';
 const {errorCreater} = require("../untils/createError");
 const passport = require('../untils/auth');
 const auth = async (req:any,res:Response,next:NextFunction) => {

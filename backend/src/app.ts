@@ -4,7 +4,7 @@ const passport = require("passport");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
-const port = 3000;
+const port = 3001;
 const user = require('./express/routes/user')
 app.use(bodyParser.json());
 app.use(cors());
@@ -13,6 +13,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static("public"));
 
+app.get('/api',(req,res,next) => {
+  res.json({
+    message:"hi Broooo"
+  })
+})
 
 app.use('/auth',user)
 
