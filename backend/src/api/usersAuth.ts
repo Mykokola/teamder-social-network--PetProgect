@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-const {createError} = require('../untils/createError')
+const createError = require('../untils/createError')
 const userService  = require('../services/usersBasicService')
 const ERROR_TYPES = require('../constants/errorTypes')
 const bcrypt = require('bcrypt')
+const gravatar = require('gravatar')
 const {JWT_SECRET} = require('../constants/envConstants')
 const jwt = require('jsonwebtoken')
+
 const registerUser = async (req:Request,res:Response,next:NextFunction) => {
     try{
     const {email,password} = req.body
@@ -15,10 +17,12 @@ const registerUser = async (req:Request,res:Response,next:NextFunction) => {
         })
         throw error
     }
+    
     const passwordHash = await bcrypt.hash(password,10)
-
+    const avatarURL = await gravatar.url(email,{},true)
     const newUser = {...req.body,
-        password:passwordHash
+        password:passwordHash,
+        avatarURL
     }
     console.log(newUser)
     let user= await userService.regUser(newUser)
@@ -47,7 +51,7 @@ const loginUser = async (req:Request,res:Response,next:NextFunction) => {
             })
             throw error
         }
-        const serializedUser = {...user};
+        const serializedUser = user;
         delete serializedUser.password;
         const token = jwt.sign(
           { sub: serializedUser._id, role: serializedUser.role },
@@ -65,4 +69,30 @@ const loginUser = async (req:Request,res:Response,next:NextFunction) => {
         next(e)
     }
 }
-export = registerUser
+const logoutUser = async (req:Request,res:Response,next:NextFunction) => {
+    try{
+        res.clearCookie("jwt");
+        return res.status(204).json();
+    }catch(e){
+        next(e)
+    }
+}
+const updateLike = async (req:any,res:Response,next:NextFunction) => {
+    try{
+        const {_id,likes}:{_id:string,likes:number} = req.user[0]
+        const {path}:{path:string} = req.route
+        let likesUpdate:number;
+        (path === '/update/like/plus') ? likesUpdate = likes + 1 :likesUpdate = likes - 1
+        const user = await userService.userUpdateById(_id,{likes:likesUpdate})
+        res.status(204).json();
+    }catch(e){
+        next(e)
+    }
+}
+
+module.exports = {
+    registerUser,
+    loginUser,
+    logoutUser,
+    updateLike
+}

@@ -9,4 +9,4 @@ const createError = (ERROR_TYPE:string,{message,data}: { message: string, data: 
         data
     })
 }
-module.exports = {createError}
+module.exports = createError

@@ -41,7 +41,13 @@ const userSchema = new Schema(
        interess:{
         type:Array,
         require:[true,'interests is required']
-       }
+       },
+       likes:{
+        type:Number,
+        default:0,
+        require:[false]
+       },
+       avatarURL: String,
       }
 )
 

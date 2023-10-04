@@ -15,8 +15,13 @@ const getUserOption = async (option:{}): Promise<[{}]> => {
     const user:[{}] = await userModel.find(option)
     return user
 }
+const userUpdateById = async (_id:string,updateOption:{}): Promise<[{}]> => {
+    const user:[{}] = await userModel.findByIdAndUpdate(_id,updateOption)
+    return user
+}
 module.exports = {
     regUser,
     getAllUser,
-    getUserOption
+    getUserOption,
+    userUpdateById
 }
