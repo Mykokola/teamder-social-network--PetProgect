@@ -12,7 +12,7 @@ import {
   RegisterNext,
 } from "../styles/auth.styled";
 import { ToastContainer, toast } from 'react-toastify';
-
+import { useEffect } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { schema,FormErrors } from "../schemaRegister/basicRegSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,16 +22,19 @@ import { useAppState} from "../state/index";
 export const RegisterBasic: React.FC = () => {
   const [state, setState] = useAppState();
   const navigate = useNavigate()
-  const {register,handleSubmit,formState:{ errors },reset} = useForm({resolver:yupResolver(schema)})
+  const {register,handleSubmit,formState:{ errors },reset} = useForm<FormErrors>({resolver:yupResolver(schema)})
   const notify = (message:string) => toast(message);
-
-
-  
-
+  useEffect(() => {
+    if(errors){
+      const errorIndex:string = Object.keys(errors)[0]
+      const typeError = {...errors}[errorIndex]
+      if(typeError?.message)notify(typeError?.message)
+    }
+  })
   const saveData = (data:any) => {
- 
     setState({ ...state, ...data });
-   // navigate("/register/additional");
+    reset()
+    navigate("/register/additional");
   }
   return (
     <>
@@ -53,6 +56,7 @@ export const RegisterBasic: React.FC = () => {
           <RegisterInput required {...register('city')} placeholder="City" type="text" />
           <RegisterInput required {...register('age')} placeholder="Age" type="text" />
         </ToLineRegInput>
+
         <RegisterNext type="submit">
           CONTINUE
         </RegisterNext>
