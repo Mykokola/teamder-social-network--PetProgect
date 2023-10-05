@@ -17,11 +17,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { schema,FormErrors } from "../schemaRegister/basicRegSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { useForm  } from "react-hook-form";
-import { useAppState } from "../state/index";
+import { useForm } from "react-hook-form";
+import { useAppState} from "../state/index";
 export const RegisterBasic: React.FC = () => {
   const [state, setState] = useAppState();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const {register,handleSubmit,formState:{ errors },reset} = useForm({resolver:yupResolver(schema)})
   const notify = (message:string) => toast(message);
 
