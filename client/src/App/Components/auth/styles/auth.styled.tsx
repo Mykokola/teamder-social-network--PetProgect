@@ -87,7 +87,7 @@ export const AuthFomrCheckBoxContainer = styled.div`
   align-items: flex-end;
   justify-content: space-between;
 `;
-export const RegisterNext = styled(NavLink)`
+export const RegisterNext = styled.button`
   display: flex;
   width: 100%;
   height: 64px;

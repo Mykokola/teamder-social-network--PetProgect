@@ -20,5 +20,3 @@ middleware: (getDefaultMiddleware) =>[
  
  ]
 })
-
-export const persistor = persistStore(store)

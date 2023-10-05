@@ -1,12 +1,8 @@
 import React from 'react'
 import {
-    AuthFormBtn,
     AuthFormTitle,
     AuthParagraf,
     SingUp,
-    ToLineRegInput,
-    RegisterInput,
-    BallItem,
     BallContainer,
     ActiveItemBall,
     RegForm,
@@ -181,7 +177,7 @@ export const RegisterInterests:React.FC = () => {
 
         </ScrollCustopm> */}
         </IteresContainer>
-        <RegisterNext to={'/'}>SIGN UP!</RegisterNext>
+        <RegisterNext >SIGN UP!</RegisterNext>
     <AuthParagraf>
           You already have an account? <SingUp to="/login">Login</SingUp>
             </AuthParagraf>
