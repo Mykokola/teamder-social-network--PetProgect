@@ -1,10 +1,8 @@
 import React from "react";
 import {
-  AuthFormBtn,
   AuthFormTitle,
   AuthParagraf,
   SingUp,
-  ToLineRegInput,
   RegisterInput,
   BallItem,
   BallContainer,
@@ -15,19 +13,34 @@ import {
   RegAdditionalBio,
 } from "../styles/auth.styled";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
 import { useAppState } from "../state/index";
-import { schema,FormErrors } from "../schemaRegister/additionalRegSchema";
-
+import { useNavigate } from "react-router-dom";
+import { schema, FormErrors } from "../schemaRegister/additionalRegSchema";
 import { useForm } from "react-hook-form";
-const {register,handleSubmit,formState:{ errors },reset} = useForm<FormErrors>({resolver:yupResolver(schema)})
-
+import { createErrorRegForm } from "../../../../untils/createErrorReg";
 export const RegisterAdditional: React.FC = () => {
   const [state, setState] = useAppState();
-
-  const saveData = (e: any) => {
-    setState({ ...state});
-    console.log(state);
+  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormErrors>({ resolver: yupResolver(schema) });
+  useEffect(() => {
+    createErrorRegForm(errors);
+  });
+  const saveData = (data: any) => {
+    const { bio } = data;
+    const socialMedia: string[] = [];
+    for (let key in data) {
+      if (key !== "bio" && data[key]) socialMedia.push(data[key]);
+    }
+    setState({ ...state, ...{ bio, socialMedia } });
+    navigate('/register/interests')
+    reset()
   };
   return (
     <>
@@ -38,17 +51,35 @@ export const RegisterAdditional: React.FC = () => {
       </BallContainer>
       <RegForm onSubmit={handleSubmit(saveData)}>
         <AuthFormTitle>Additional information</AuthFormTitle>
-        <RegAdditionalBio {...register("bio")} placeholder="Bio"></RegAdditionalBio>
-        <RegisterInput {...register("socialOne")} placeholder="Social Media URL #1" type="text" />
-        <RegisterInput {...register("socialTwo")} placeholder="Social Media URL #2" type="text" />
-        <RegisterInput {...register("socialFree")} placeholder="Social Media URL #3" type="text" />
-        <RegisterNext type="button" onClick={saveData}>
-          CONTINUE
-        </RegisterNext>
+        <RegAdditionalBio
+          required
+          {...register("bio")}
+          placeholder="Bio"
+        ></RegAdditionalBio>
+        <RegisterInput
+          required
+          {...register("socialOne")}
+          placeholder="Social Media URL #1"
+          type="text"
+        />
+        <RegisterInput
+          {...register("socialTwo")}
+          name="socialTwo"
+          placeholder="Social Media URL #2"
+          type="text"
+        />
+        <RegisterInput
+          {...register("socialFree")}
+          placeholder="Social Media URL #3"
+          name="socialFree"
+          type="text"
+        />
+        <RegisterNext type="submit">CONTINUE</RegisterNext>
         <AuthParagraf>
           You already have an account? <SingUp to="/login">Login</SingUp>
         </AuthParagraf>
       </RegForm>
+      <ToastContainer />
     </>
   );
 };

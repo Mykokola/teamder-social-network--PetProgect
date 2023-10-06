@@ -13,11 +13,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.get('/api',(req,res,next) => {
-  res.json({
-    message:"hi Broooo"
-  })
-})
+
 
 app.use('/auth',user)
 

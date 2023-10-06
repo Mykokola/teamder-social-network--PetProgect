@@ -11,7 +11,15 @@ export const authApi:any = createApi({
     endpoints:(builder) => ({
         getAllUsers: builder.query({
             query: () => '/users',
+        }),
+    regUser: builder.mutation({
+        query: body => ({
+            url:'/register',
+            method:'POST',
+            body:body,
         })
     })
+    })
 })
-export const {useGetAllUsersQuery} = authApi
+
+export const {useGetAllUsersQuery,useRegUserMutation} = authApi

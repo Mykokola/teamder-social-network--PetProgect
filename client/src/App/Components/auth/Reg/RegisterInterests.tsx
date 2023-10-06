@@ -14,7 +14,21 @@ import {
     InterestsItem,
     IteresInput
   } from "../styles/auth.styled";
+  import { useForm } from "react-hook-form";
+  import { hobbies } from '../constants/hobbyArry';
+  import { useAppState } from "../state/index";
+  import { useRegUserMutation } from '../../../redux/auth/auth';
+  import {validateFruitSelection} from '../../../../untils/validateInteresChice'
 export const RegisterInterests:React.FC = () => {
+    const [setNewUser] = useRegUserMutation()
+    const { register, handleSubmit,  formState: { errors }, watch } = useForm();
+    const [state, setState] =  useAppState();
+    const saveData = async (data:any)  => {
+        const selectedInterests = watch('interests');
+        setState({...state,...{selectedInterests}})
+        setNewUser(state)
+        console.log(state)
+    }
     return(
         <>
             <BallContainer>
@@ -22,162 +36,29 @@ export const RegisterInterests:React.FC = () => {
         <BallItemActive>2</BallItemActive>
         <BallItemActive>3</BallItemActive>
     </BallContainer>
-    <RegForm>
+    <RegForm onSubmit={handleSubmit(saveData)}>
         <AuthFormTitle>Interests</AuthFormTitle>
         <IteresContainer>
         <InterestsList>
-        <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-              <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-              <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <input type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-              <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-              <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-              <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-              <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-              <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-            <InterestsItem>
-            <InterestsLabel>
-                <IteresInput type="checkbox" />Sport
-                </InterestsLabel>
-            </InterestsItem>
-           
-        </InterestsList>
+            {hobbies.map((e,i) => {
+                return(
+                    <InterestsItem key={i}>
+                    <InterestsLabel>
+                        <IteresInput
+                        type="checkbox"
+                        value={e} 
+                        {...register('interests',{ validate: validateFruitSelection })}
+                        />{e}
+                        </InterestsLabel>
+                    </InterestsItem>
+                )
+            })}
+                   </InterestsList>
         {/* <ScrollCustopm>
 
         </ScrollCustopm> */}
         </IteresContainer>
-        <RegisterNext >SIGN UP!</RegisterNext>
+        <RegisterNext type='submit'>SIGN UP!</RegisterNext>
     <AuthParagraf>
           You already have an account? <SingUp to="/login">Login</SingUp>
             </AuthParagraf>

@@ -1,4 +1,4 @@
-  import React from "react";
+import React from "react";
 import {
   AuthFormTitle,
   AuthParagraf,
@@ -11,31 +11,31 @@ import {
   RegForm,
   RegisterNext,
 } from "../styles/auth.styled";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";
-import 'react-toastify/dist/ReactToastify.css';
-import { schema,FormErrors } from "../schemaRegister/basicRegSchema";
+import { schema, FormErrors } from "../schemaRegister/basicRegSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useAppState} from "../state/index";
+import { useAppState } from "../state/index";
+import { createErrorRegForm } from "../../../../untils/createErrorReg";
 export const RegisterBasic: React.FC = () => {
   const [state, setState] = useAppState();
-  const navigate = useNavigate()
-  const {register,handleSubmit,formState:{ errors },reset} = useForm<FormErrors>({resolver:yupResolver(schema)})
-  const notify = (message:string) => toast(message);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormErrors>({ resolver: yupResolver(schema) });
   useEffect(() => {
-    if(errors){
-      const errorIndex:string = Object.keys(errors)[0]
-      const typeError = {...errors}[errorIndex]
-      if(typeError?.message)notify(typeError?.message)
-    }
-  })
-  const saveData = (data:any) => {
+    createErrorRegForm(errors);
+  });
+  const saveData = (data: any) => {
     setState({ ...state, ...data });
-    reset()
+    reset();
     navigate("/register/additional");
-  }
+  };
   return (
     <>
       <BallContainer>
@@ -45,21 +45,54 @@ export const RegisterBasic: React.FC = () => {
       </BallContainer>
       <RegForm onSubmit={handleSubmit(saveData)}>
         <AuthFormTitle>Basic information</AuthFormTitle>
-        <RegisterInput  required {...register('login')} placeholder="Login" type="login" />
-        <RegisterInput required {...register('email')} placeholder="Email" type="email" />
+        <RegisterInput
+          required
+          {...register("login")}
+          placeholder="Login"
+          type="login"
+        />
+        <RegisterInput
+          required
+          {...register("email")}
+          placeholder="Email"
+          type="email"
+        />
         <ToLineRegInput>
-          <RegisterInput required {...register('name')} placeholder="Name" type="name" />
-          <RegisterInput required {...register('surName')} placeholder="Surmane" type="surName" />
+          <RegisterInput
+            required
+            {...register("name")}
+            placeholder="Name"
+            type="name"
+          />
+          <RegisterInput
+            required
+            {...register("surName")}
+            placeholder="Surmane"
+            type="surName"
+          />
         </ToLineRegInput>
-        <RegisterInput required {...register('password')} placeholder="Password" type="password" />
+        <RegisterInput
+          required
+          {...register("password")}
+          placeholder="Password"
+          type="password"
+        />
         <ToLineRegInput>
-          <RegisterInput required {...register('city')} placeholder="City" type="text" />
-          <RegisterInput required {...register('age')} placeholder="Age" type="text" />
+          <RegisterInput
+            required
+            {...register("city")}
+            placeholder="City"
+            type="text"
+          />
+          <RegisterInput
+            required
+            {...register("age")}
+            placeholder="Age"
+            type="text"
+          />
         </ToLineRegInput>
 
-        <RegisterNext type="submit">
-          CONTINUE
-        </RegisterNext>
+        <RegisterNext type="submit">CONTINUE</RegisterNext>
         <AuthParagraf>
           You already have an account? <SingUp to="/login">Login</SingUp>
         </AuthParagraf>
