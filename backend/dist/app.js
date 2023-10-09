@@ -17,11 +17,6 @@ app.use(passport.initialize());
 app.use(cookieParser());
 app.use(express_1.default.json());
 app.use(express_1.default.static("public"));
-app.get('/api', (req, res, next) => {
-    res.json({
-        message: "hi Broooo"
-    });
-});
 app.use('/auth', user);
 app.use((req, res) => {
     res.status(404).json({ message: "Not found" });

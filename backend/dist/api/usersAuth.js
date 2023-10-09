@@ -20,7 +20,7 @@ const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     try {
         const users = yield userService.getAllUser();
         res.status(200).json({
-            data: users
+            users
         });
     }
     catch (e) {
@@ -40,7 +40,6 @@ const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         const passwordHash = yield bcrypt.hash(password, 10);
         const avatarURL = yield gravatar.url(email, {}, true);
         const newUser = Object.assign(Object.assign({}, req.body), { password: passwordHash, avatarURL });
-        console.log(newUser);
         let user = yield userService.regUser(newUser);
         res.status(200).json({
             data: user,

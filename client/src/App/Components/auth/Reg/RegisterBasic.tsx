@@ -11,15 +11,19 @@ import {
   RegForm,
   RegisterNext,
 } from "../styles/auth.styled";
-import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
 import { schema, FormErrors } from "../schemaRegister/basicRegSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAppState } from "../state/index";
+import { useGetAllUsersQuery } from "../../../redux/auth/auth";
 import { createErrorRegForm } from "../../../../untils/createErrorReg";
 export const RegisterBasic: React.FC = () => {
+  const { data } = useGetAllUsersQuery();
   const [state, setState] = useAppState();
   const navigate = useNavigate();
   const {
@@ -28,13 +32,29 @@ export const RegisterBasic: React.FC = () => {
     formState: { errors },
     reset,
   } = useForm<FormErrors>({ resolver: yupResolver(schema) });
+  const notify = (message: string) => toast(message);
+
   useEffect(() => {
     createErrorRegForm(errors);
   });
+
+  const emailCheck = (userEmail: string) => {
+    const { users } = data;
+    const result = users.some(
+      ({ email }: { email: string }) => email === userEmail
+    );
+    return result;
+  };
+
   const saveData = (data: any) => {
-    setState({ ...state, ...data });
-    reset();
-    navigate("/register/additional");
+    const { email } = data;
+    if (!emailCheck(email)) {
+      setState({ ...state, ...data });
+      reset();
+      navigate("/register/additional");
+    } else {
+      notify("user with this email is already registered");
+    }
   };
   return (
     <>

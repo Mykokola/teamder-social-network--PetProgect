@@ -27,7 +27,6 @@ export const RegisterInterests:React.FC = () => {
         const selectedInterests = watch('interests');
         setState({...state,...{selectedInterests}})
         setNewUser(state)
-        console.log(state)
     }
     return(
         <>

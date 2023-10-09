@@ -11,7 +11,7 @@ const getAllUsers = async (req:Request,res:Response,next:NextFunction) => {
 try{
     const users = await userService.getAllUser()
     res.status(200).json({
-        data:users
+        users
     })
 }catch(e){
     next(e)
@@ -36,7 +36,6 @@ const registerUser = async (req:Request,res:Response,next:NextFunction) => {
         password:passwordHash,
         avatarURL
     }
-    console.log(newUser)
     let user= await userService.regUser(newUser)
       res.status(200).json({
         data: user,

@@ -1,5 +1,3 @@
-import React from "react";
-import axios from 'axios';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseQuery = fetchBaseQuery({
@@ -17,6 +15,13 @@ export const authApi:any = createApi({
             url:'/register',
             method:'POST',
             body:body,
+        })
+    }),
+    authUser: builder.mutation({
+        query:body => ({
+            url:'/login',
+            method:'POST',
+            body
         })
     })
     })

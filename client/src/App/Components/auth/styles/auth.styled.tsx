@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import bagroundImg from '../../../images/auth/imgForAuthPage.png'
 export const AuthContainer = styled.div`
   display: flex;
   background: #000;
 `;
 export const AuthImgContainer = styled.div`
-  background-image: url(https://s3-alpha-sig.figma.com/img/927d/e727/f2cc2889559c6813ee4b047316740946?Expires=1696809600&Signature=FqwjZygD08Zz8fMgrXRVAqKHRfXfU5q2ddKSRAjW4s2TA6qNmV9YZQ5vtUgb~uPNKN5jjwFaLNOpxqNteYx~56~8LUy4ZzFagsEoZ4jbkKMNq2kJlfqqe1hnJvHnNXezItszNyyZuh0tAnDasFigm7XjXQ2AM90aK9g4OIjc2UeKoIKcEc7Vus6c63x7mCjAjCg-gXfB4BKGTX2I~5riMXsBx4GrNlh8D~~oyQJRMN4ESE8AIkgm9SQNeFBvqoIi6tfeXRG0rJwZ~7YXJytN1BIi6pYk8gWwGjzwaGQuyJpH7IBopn1cDr8Y6i6drX08SE9yIpRMRs143m6Mg3v3dA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4);
+  background-image: url(${bagroundImg});
   background-size: 50vw 100%; /* Зображення розтягнеся на всю ширину та висоту контейнера */
   background-repeat: no-repeat;
   height: 100vh; /* Встановлюємо висоту контейнера на висоту екрана */
