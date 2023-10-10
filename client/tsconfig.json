@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["react", "react-dom", "react-redux"],
+    "types": ["react", "react-dom", "react-redux","react-router-dom"],
     "target": "es5",
     "lib": [
       "dom",

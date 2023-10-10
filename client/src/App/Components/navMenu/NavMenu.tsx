@@ -27,7 +27,7 @@ export const NavMenu: React.FC = () => {
         </LogoNav>
         <NavMenuList>
           <NavMenuItem>
-            <NavMenuLinkNavigate to='/'>
+            <NavMenuLinkNavigate to=''>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -47,7 +47,7 @@ export const NavMenu: React.FC = () => {
             </NavMenuLinkNavigate>
           </NavMenuItem>
           <NavMenuItem>
-          <NavMenuLinkNavigate to='/friends'>
+          <NavMenuLinkNavigate to='friends'>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="23"
@@ -81,7 +81,7 @@ export const NavMenu: React.FC = () => {
             </NavMenuLinkNavigate>
           </NavMenuItem>
           <NavMenuItem>
-            <NavMenuLinkNavigate to='/profile'>
+            <NavMenuLinkNavigate to='profile'>
                           <svg
               xmlns="http://www.w3.org/2000/svg"
               width="19"

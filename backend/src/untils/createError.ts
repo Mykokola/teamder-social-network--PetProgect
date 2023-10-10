@@ -3,7 +3,7 @@ const createError = (ERROR_TYPE:string,{message,data}: { message: string, data: 
     message:string,
     data:string
 }> => {
-    return Promise.resolve({
+    return Promise.reject({
         type:ERROR_TYPE,
         message,
         data

@@ -51,7 +51,7 @@ export const RegisterBasic: React.FC = () => {
     if (!emailCheck(email)) {
       setState({ ...state, ...data });
       reset();
-      navigate("/register/additional");
+      navigate("/auth/register/additional");
     } else {
       notify("user with this email is already registered");
     }
@@ -114,7 +114,7 @@ export const RegisterBasic: React.FC = () => {
 
         <RegisterNext type="submit">CONTINUE</RegisterNext>
         <AuthParagraf>
-          You already have an account? <SingUp to="/login">Login</SingUp>
+          You already have an account? <SingUp to="/auth/login">Login</SingUp>
         </AuthParagraf>
       </RegForm>
       <ToastContainer />

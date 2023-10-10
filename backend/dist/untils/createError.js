@@ -1,5 +1,5 @@
 const createError = (ERROR_TYPE, { message, data }) => {
-    return Promise.resolve({
+    return Promise.reject({
         type: ERROR_TYPE,
         message,
         data

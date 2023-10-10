@@ -39,7 +39,7 @@ export const RegisterAdditional: React.FC = () => {
       if (key !== "bio" && data[key]) socialMedia.push(data[key]);
     }
     setState({ ...state, ...{ bio, socialMedia } });
-    navigate('/register/interests')
+    navigate('/auth/register/interests')
     reset()
   };
   return (
@@ -76,7 +76,7 @@ export const RegisterAdditional: React.FC = () => {
         />
         <RegisterNext type="submit">CONTINUE</RegisterNext>
         <AuthParagraf>
-          You already have an account? <SingUp to="/login">Login</SingUp>
+          You already have an account? <SingUp to="/auth/login">Login</SingUp>
         </AuthParagraf>
       </RegForm>
       <ToastContainer />
