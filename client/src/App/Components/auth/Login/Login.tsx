@@ -58,7 +58,8 @@ export const Login: React.FC = () => {
         </AuthFomrCheckBoxContainer>
         <AuthFormBtn>Login now</AuthFormBtn>
         <AuthParagraf>
-          Don’t have an account yet? <SingUp to="/auth/register">Sign Up</SingUp>
+          Don’t have an account yet?{" "}
+          <SingUp to="/auth/register">Sign Up</SingUp>
         </AuthParagraf>
       </AuthFomr>
       <ToastContainer />

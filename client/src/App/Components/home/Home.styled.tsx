@@ -4,6 +4,8 @@ export const HomeContainer = styled.div`
 border: 1px solid gray;
 grid-area: 1 / 2 / 5 / 4;
 `
+export const HomePageP = styled.p`
+overflow-wrap: anywhere;`
 export const HomeHeader = styled.div`
 padding: 11px;
     padding-bottom: 25px;
@@ -99,6 +101,7 @@ color: white;
 text-decoration: underline;
 `
 export const SeachImg = styled.img`
+padding: 10px;
 border-radius: 50%;
 width: 110px;
 `

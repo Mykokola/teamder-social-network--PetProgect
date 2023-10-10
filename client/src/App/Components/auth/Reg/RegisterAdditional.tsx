@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form";
 import { createErrorRegForm } from "../../../../untils/createErrorReg";
 export const RegisterAdditional: React.FC = () => {
   const [state, setState] = useAppState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -39,8 +39,8 @@ export const RegisterAdditional: React.FC = () => {
       if (key !== "bio" && data[key]) socialMedia.push(data[key]);
     }
     setState({ ...state, ...{ bio, socialMedia } });
-    navigate('/auth/register/interests')
-    reset()
+    navigate("/auth/register/interests");
+    reset();
   };
   return (
     <>

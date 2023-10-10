@@ -14,12 +14,14 @@ import {
   InterestsItem,
   IteresInput,
 } from "../styles/auth.styled";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { hobbies } from "../constants/hobbyArry";
 import { useAppState } from "../state/index";
 import { useRegUserMutation } from "../../../redux/auth/auth";
 import { validateInteresSelection } from "../../../../untils/validateInteresChice";
 export const RegisterInterests: React.FC = () => {
+  const navigate = useNavigate()
   const [setNewUser] = useRegUserMutation();
   const {
     register,
@@ -31,6 +33,7 @@ export const RegisterInterests: React.FC = () => {
   const saveData = async (data: any) => {
     const interess = watch("interests");
     setNewUser({ ...state, ...{ interess } });
+    navigate('/auth/login')
   };
   return (
     <>

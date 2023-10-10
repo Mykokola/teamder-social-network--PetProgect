@@ -29,8 +29,7 @@ export const Auth: React.FC = () => {
               <Route
                 path="/register/additional"
                 element={<RegisterAdditional></RegisterAdditional>}
-              >
-              </Route>
+              ></Route>
               <Route
                 path="/register/interests"
                 element={<RegisterInterests></RegisterInterests>}

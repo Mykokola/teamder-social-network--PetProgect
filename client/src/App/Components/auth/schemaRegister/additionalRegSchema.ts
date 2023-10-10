@@ -1,7 +1,7 @@
 import React from "react";
 import * as yup from "yup";
 export const schema = yup.object().shape({
-    bio:yup.string().min(20).max(150).required(),
+    bio:yup.string().min(15).max(90).required(),
     socialOne:yup
     .string()
     .url('Invalid URL format')
