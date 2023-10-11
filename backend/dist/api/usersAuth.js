@@ -27,6 +27,8 @@ const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         next(e);
     }
 });
+const currentUser = (req, res, next) => {
+};
 const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
@@ -109,6 +111,7 @@ module.exports = {
     loginUser,
     logoutUser,
     updateLike,
-    getAllUsers
+    getAllUsers,
+    currentUser
 };
 //# sourceMappingURL=usersAuth.js.map

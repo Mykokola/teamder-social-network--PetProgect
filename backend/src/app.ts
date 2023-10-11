@@ -13,8 +13,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static("public"));
 
-
-
 app.use('/auth',user)
 
 app.use((req, res) => {

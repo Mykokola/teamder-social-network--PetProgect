@@ -18,20 +18,23 @@ try{
 }
 }
 
+const currentUser = (req:Request,res:Response,next:NextFunction) => {
+
+}
 
 const registerUser = async (req:Request,res:Response,next:NextFunction) => {
     try{
     const {email,password} = req.body
     const dubliceteUser:{} = (await userService.getUserOption({email}))[0]
     if(dubliceteUser){
-        const error = await createError(ERROR_TYPES.CONFLICT,{
+        const error =  createError(ERROR_TYPES.CONFLICT,{
             message:'user with this email address has been registered'
         })
         throw error
     }
     
-    const passwordHash = await bcrypt.hash(password,10)
-    const avatarURL = await gravatar.url(email,{},true)
+    const passwordHash =  bcrypt.hash(password,10)
+    const avatarURL =  gravatar.url(email,{},true)
     const newUser = {...req.body,
         password:passwordHash,
         avatarURL
@@ -49,7 +52,7 @@ const loginUser = async (req:Request,res:Response,next:NextFunction) => {
         const {password,email}:{password:string,email:string} = req.body
         const user = (await userService.getUserOption({email}))[0]
         if(!user){
-            const error = await createError(ERROR_TYPES.NOT_FOUND,{
+            const error =  createError(ERROR_TYPES.NOT_FOUND,{
                 message:'user with this email not found'
             })
             throw error
@@ -89,16 +92,12 @@ const logoutUser = async (req:Request,res:Response,next:NextFunction) => {
     }
 }
 const updateLike = async (req:any,res:Response,next:NextFunction) => {
-    try{
         const {_id,likes}:{_id:string,likes:number} = req.user[0]
         const {path}:{path:string} = req.route
         let likesUpdate:number;
         (path === '/update/like/plus') ? likesUpdate = likes + 1 :likesUpdate = likes - 1
         const user = await userService.userUpdateById(_id,{likes:likesUpdate})
         res.status(204).json();
-    }catch(e){
-        next(e)
-    }
 }
 
 module.exports = {
@@ -106,5 +105,6 @@ module.exports = {
     loginUser,
     logoutUser,
     updateLike,
-    getAllUsers
+    getAllUsers,
+    currentUser
 }

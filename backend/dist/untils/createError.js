@@ -1,9 +1,9 @@
 const createError = (ERROR_TYPE, { message, data }) => {
-    return Promise.reject({
+    return {
         type: ERROR_TYPE,
         message,
         data
-    });
+    };
 };
 module.exports = createError;
 //# sourceMappingURL=createError.js.map

@@ -9,7 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const { errorCreater } = require("../untils/createError");
+const ERROR_TYPES = require('../constants/errorTypes');
+const createError = require("../untils/createError");
 const passport = require('../untils/auth');
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passport.authenticate("jwt", { session: false }, (error, user) => {
@@ -17,7 +18,7 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
             next(error);
         }
         if (!user) {
-            const error = errorCreater(ERROR_TYPES.UNAUTHORIZED, {
+            const error = createError(ERROR_TYPES.UNAUTHORIZED, {
                 message: "Not authorized",
             });
             next(error);
