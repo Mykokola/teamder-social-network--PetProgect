@@ -91,6 +91,7 @@ padding: 25px;
 `
 
 export const SeachItem = styled.li`
+height:120px;
 display: flex;
 border-top: 1px solid gray;
 border-bottom: 1px solid gray;

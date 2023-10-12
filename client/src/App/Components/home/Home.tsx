@@ -1,9 +1,6 @@
 import React from "react";
-import avarUser from "../../images/avatarUser.png";
 import { UserProfile } from "./types";
-import { nanoid } from "@reduxjs/toolkit";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
 import { useGetAllUsersQuery } from "../../redux/auth/auth";
 import {
   HomePageP,
@@ -29,6 +26,7 @@ export const Home: React.FC = () => {
   const [filter, setFilter] = useState("");
   const [filterUsers, setUsersFilter] = useState([...users]);
   const searchUser = (event: React.FormEvent) => {
+
     event.preventDefault();
     let arryFilter = users.filter((e: any) => {
       return e.name.toLowerCase().includes(filter.toLocaleLowerCase());
