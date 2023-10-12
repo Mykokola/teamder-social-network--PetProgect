@@ -1,15 +1,21 @@
 const  authService = require('../../api/usersAuth')
 const express = require("express");
+import '../../untils/requestModuleUser'; // Імпортуємо розширення типів
+
+const {validateLogin,validateReg} = require('../../middlewears/validators')
 const router = express.Router();
 const {auth} = require('../../middlewears/auth')
+
 const handlerError = require('../../middlewears/handlerError')
-router.use(handlerError)
 router.get('/users',authService.getAllUsers)
-router.post('/register',authService.registerUser)
-router.post('/login',authService.loginUser)
+router.post('/get/user',auth,authService.getUser)
+router.post('/register',validateReg,authService.registerUser)
+router.post('/login',validateLogin,authService.loginUser)
 router.get('/current/user',auth,authService.currentUser)
 router.post('/logout',auth,authService.logoutUser)
 router.patch('/update/like/plus',auth,authService.updateLike)
 router.patch('/update/like/minus',auth,authService.updateLike)
+
+router.use(handlerError)
 
 module.exports = router

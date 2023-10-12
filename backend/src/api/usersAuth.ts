@@ -19,9 +19,46 @@ try{
 }
 
 const currentUser = (req:Request,res:Response,next:NextFunction) => {
-
+    try{
+        const user:{} = req.user[0]
+        res.status(200).json({
+            user
+        })
+    }catch(e){
+        next(e)
+    }
 }
+const getUser = async (req:Request,res:Response,next:NextFunction) => {
+    try{  
 
+     const friendLogin:string =  req.body?.login
+     const {_id,friends}:{_id:string,friends:any} = req.user[0]
+    const friend = await (userService.getUserOption({login:friendLogin}))
+    const newFrined = JSON.parse(JSON.stringify(friend[0]))
+    const dublicateFriend  = friends.some(({login}:{login:string}) => login === friendLogin)
+    if(!friend){
+        const error =  createError(ERROR_TYPES.NOT_FOUND,{
+            message:'user with this login not a found'
+        })
+        throw error
+    }
+
+    if(dublicateFriend){
+        const error =  createError(ERROR_TYPES.BAD_REQUEST,{
+            message:'this user is your friend list'
+        })
+        throw error
+    }
+    delete newFrined.password
+    delete newFrined.friends
+    const addFriend = await userService.userUpdateById(_id,{friends:[...friends,newFrined]})
+    res.status(200).json({
+        user:'add successful'
+    })
+}catch(e){
+    next(e)
+}
+}
 const registerUser = async (req:Request,res:Response,next:NextFunction) => {
     try{
     const {email,password} = req.body
@@ -33,8 +70,8 @@ const registerUser = async (req:Request,res:Response,next:NextFunction) => {
         throw error
     }
     
-    const passwordHash =  bcrypt.hash(password,10)
-    const avatarURL =  gravatar.url(email,{},true)
+    const passwordHash = await  bcrypt.hash(password,10)
+    const avatarURL =  await gravatar.url(email,{},true)
     const newUser = {...req.body,
         password:passwordHash,
         avatarURL
@@ -68,7 +105,7 @@ const loginUser = async (req:Request,res:Response,next:NextFunction) => {
         const serializedUser = user;
         delete serializedUser.password;
         const token = jwt.sign(
-          { sub: serializedUser._id, role: serializedUser.role },
+          { sub: serializedUser._id },
           JWT_SECRET,
           { expiresIn: 3600 }
         );
@@ -106,5 +143,6 @@ module.exports = {
     logoutUser,
     updateLike,
     getAllUsers,
-    currentUser
+    currentUser,
+    getUser
 }
