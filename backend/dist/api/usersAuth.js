@@ -28,13 +28,53 @@ const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 const currentUser = (req, res, next) => {
+    try {
+        const user = req.user[0];
+        res.status(200).json({
+            user
+        });
+    }
+    catch (e) {
+        next(e);
+    }
 };
+const addFriend = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    try {
+        const friendLogin = (_a = req.body) === null || _a === void 0 ? void 0 : _a.login;
+        const { _id, friends } = req.user[0];
+        const friend = yield (userService.getUserOption({ login: friendLogin }));
+        const newFrined = JSON.parse(JSON.stringify(friend[0]));
+        const dublicateFriend = friends.some(({ login }) => login === friendLogin);
+        if (!friend) {
+            const error = createError(ERROR_TYPES.NOT_FOUND, {
+                message: 'user with this login not a found'
+            });
+            throw error;
+        }
+        if (dublicateFriend) {
+            const error = createError(ERROR_TYPES.BAD_REQUEST, {
+                message: 'this user is your friend list'
+            });
+            throw error;
+        }
+        delete newFrined.password;
+        delete newFrined.friends;
+        const addFriend = yield userService.userUpdateById(_id, { friends: [...friends, newFrined] });
+        res.status(200).json({
+            user: 'add successful'
+        });
+    }
+    catch (e) {
+        next(e);
+    }
+});
 const registerUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
         const dubliceteUser = (yield userService.getUserOption({ email }))[0];
         if (dubliceteUser) {
-            const error = yield createError(ERROR_TYPES.CONFLICT, {
+            const error = createError(ERROR_TYPES.CONFLICT, {
                 message: 'user with this email address has been registered'
             });
             throw error;
@@ -56,7 +96,7 @@ const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         const { password, email } = req.body;
         const user = (yield userService.getUserOption({ email }))[0];
         if (!user) {
-            const error = yield createError(ERROR_TYPES.NOT_FOUND, {
+            const error = createError(ERROR_TYPES.NOT_FOUND, {
                 message: 'user with this email not found'
             });
             throw error;
@@ -71,7 +111,7 @@ const loginUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function
         }
         const serializedUser = user;
         delete serializedUser.password;
-        const token = jwt.sign({ sub: serializedUser._id, role: serializedUser.role }, JWT_SECRET, { expiresIn: 3600 });
+        const token = jwt.sign({ sub: serializedUser._id }, JWT_SECRET, { expiresIn: 3600 });
         res.cookie("jwt", token, { secure: true });
         res.status(200).json({
             data: {
@@ -94,17 +134,12 @@ const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 const updateLike = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { _id, likes } = req.user[0];
-        const { path } = req.route;
-        let likesUpdate;
-        (path === '/update/like/plus') ? likesUpdate = likes + 1 : likesUpdate = likes - 1;
-        const user = yield userService.userUpdateById(_id, { likes: likesUpdate });
-        res.status(204).json();
-    }
-    catch (e) {
-        next(e);
-    }
+    const { _id, likes } = req.user[0];
+    const { path } = req.route;
+    let likesUpdate;
+    (path === '/update/like/plus') ? likesUpdate = likes + 1 : likesUpdate = likes - 1;
+    const user = yield userService.userUpdateById(_id, { likes: likesUpdate });
+    res.status(204).json();
 });
 module.exports = {
     registerUser,
@@ -112,6 +147,7 @@ module.exports = {
     logoutUser,
     updateLike,
     getAllUsers,
-    currentUser
+    currentUser,
+    addFriend
 };
 //# sourceMappingURL=usersAuth.js.map

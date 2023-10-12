@@ -28,7 +28,7 @@ const currentUser = (req:Request,res:Response,next:NextFunction) => {
         next(e)
     }
 }
-const getUser = async (req:Request,res:Response,next:NextFunction) => {
+const addFriend = async (req:Request,res:Response,next:NextFunction) => {
     try{  
 
      const friendLogin:string =  req.body?.login
@@ -144,5 +144,5 @@ module.exports = {
     updateLike,
     getAllUsers,
     currentUser,
-    getUser
+    addFriend
 }

@@ -38,6 +38,10 @@ const userSchema = new Schema({
         type: Array,
         require: [false]
     },
+    friends: {
+        type: Array,
+        require: [false]
+    },
     interess: {
         type: Array,
         require: [true, 'interests is required']

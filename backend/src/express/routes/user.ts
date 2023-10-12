@@ -8,7 +8,7 @@ const {auth} = require('../../middlewears/auth')
 
 const handlerError = require('../../middlewears/handlerError')
 router.get('/users',authService.getAllUsers)
-router.post('/get/user',auth,authService.getUser)
+router.post('/addFriend',auth,authService.addFriend)
 router.post('/register',validateReg,authService.registerUser)
 router.post('/login',validateLogin,authService.loginUser)
 router.get('/current/user',auth,authService.currentUser)

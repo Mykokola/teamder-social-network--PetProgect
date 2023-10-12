@@ -15,13 +15,13 @@ const passport = require('../untils/auth');
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     passport.authenticate("jwt", { session: false }, (error, user) => {
         if (error) {
-            next(error);
+            return next(error);
         }
         if (!user) {
             const error = createError(ERROR_TYPES.UNAUTHORIZED, {
                 message: "Not authorized",
             });
-            next(error);
+            return next(error);
         }
         req.user = user;
         next();

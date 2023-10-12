@@ -92,6 +92,7 @@ padding: 25px;
 
 export const SeachItem = styled.li`
 height:120px;
+box-sizing: border-box;
 display: flex;
 border-top: 1px solid gray;
 border-bottom: 1px solid gray;
@@ -104,5 +105,6 @@ text-decoration: underline;
 export const SeachImg = styled.img`
 padding: 10px;
 border-radius: 50%;
+box-sizing: border-box;
 width: 110px;
 `
