@@ -6,5 +6,7 @@ export interface UserProfile {
     surName: string;
     bio: string;
     _id:number;
+    login:string,
+    friends:[{}]
   }
   

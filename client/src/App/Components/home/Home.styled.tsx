@@ -101,6 +101,7 @@ export const UserAddandMessageBtn = styled.button`
 background: inherit;
 color: white;
 text-decoration: underline;
+white-space: nowrap;
 `
 export const SeachImg = styled.img`
 padding: 10px;

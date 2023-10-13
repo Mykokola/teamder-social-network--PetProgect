@@ -62,12 +62,13 @@ export const authApi: any = createApi({
         method: "PATCH",
         body,
       }),
+
     }),
   }),
 });
 
 export const {
-  usecurrentUserQuery,
+  useCurrentUserQuery,
   useGetAllUsersQuery,
   useRegUserMutation,
   useAuthUserMutation,
