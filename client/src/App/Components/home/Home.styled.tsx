@@ -1,8 +1,17 @@
 import React from "react";
 import styled from 'styled-components'
+import { NavLink } from "react-router-dom";
 export const HomeContainer = styled.div`
 border: 1px solid gray;
 grid-area: 1 / 2 / 5 / 4;
+`
+export const SendMessage = styled(NavLink)`
+background: inherit;
+color: white;
+text-decoration: underline;
+white-space: nowrap;
+
+
 `
 export const HomePageP = styled.p`
 overflow-wrap: anywhere;`
@@ -88,8 +97,12 @@ display: flex;
 flex-direction: column;
 gap: 12px;
 padding: 25px;
+text-align: center;
+align-items: center;
 `
-
+export const UserSendMessageParagraf = styled.p`
+width: 105px;
+`
 export const SeachItem = styled.li`
 height:120px;
 box-sizing: border-box;
@@ -103,6 +116,7 @@ color: white;
 text-decoration: underline;
 white-space: nowrap;
 `
+
 export const SeachImg = styled.img`
 padding: 10px;
 border-radius: 50%;

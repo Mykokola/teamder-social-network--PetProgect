@@ -7,6 +7,7 @@ import {
   useAddFriendMutation
 } from "../../redux/auth/auth";
 import {
+  UserSendMessageParagraf,
   HomePageP,
   HomeBtn,
   HomeContainer,
@@ -22,15 +23,21 @@ import {
   UserAddandMessageBtn,
   AbauthUserContainer,
   UserAddAndMessage,
+  SendMessage
 } from "./Home.styled";
 import { useState } from "react";
 export const Home: React.FC = () => {
   const { data: allUsersArry } = useGetAllUsersQuery();
-  const { data: currentUser } = useCurrentUserQuery();
+  const { data: currentUser ,refetch } = useCurrentUserQuery();
   const [addFrined] = useAddFriendMutation()
   const { users = [] } = allUsersArry ? allUsersArry : [];
   const [filter, setFilter] = useState("");
   const [filterUsers, setUsersFilter] = useState([...users]);
+  //FUNCTION
+  const addFriendBtn = async (login:string) => {
+  await addFrined({login})
+  await  refetch()
+  }
   const searchUser = (event: React.FormEvent) => {
     event.preventDefault();
     let arryFilter = users.filter((e: any) => {
@@ -43,7 +50,6 @@ export const Home: React.FC = () => {
       setUsersFilter(users);
     }
   }, [users]);
-
   return (
     <HomeContainer>
       <HomeHeader>
@@ -63,7 +69,7 @@ export const Home: React.FC = () => {
           {filterUsers ? (
             filterUsers.map(
               (
-                { _id, avatarURL, name, surName, bio, login,friends }: UserProfile,
+                { _id, avatarURL, name, surName, bio, login }: UserProfile,
                 i: number
               ) => {
                 return (
@@ -76,18 +82,19 @@ export const Home: React.FC = () => {
                       <HomePageP>{bio}</HomePageP>
                     </AbauthUserContainer>
                     <UserAddAndMessage>
+                      <>
                       {currentUser?.user?.login !== login ? (
-                        <UserAddandMessageBtn onClick={() => addFrined({login})}>Add Friend</UserAddandMessageBtn>
+                    currentUser?.user?.friends?.some((friend:{login:string}) => friend.login === login) ? (
+                      <UserSendMessageParagraf>Send Messages your friend ;)</UserSendMessageParagraf>
+                    ) : (
+                      <UserAddandMessageBtn onClick={() => addFriendBtn(login)}>
+                        Add Friend
+                      </UserAddandMessageBtn>
+                    )
                       ) : null
                      }
-                      <>
-                       {/* {friends.map((e:{login:string}) => {
-                        if(login===e.login){
-
-                        }
-                       })} */}
-                       </>
-                      <UserAddandMessageBtn>Send Message</UserAddandMessageBtn>
+                     </>
+                      <SendMessage to='chat'>Send Message</SendMessage>
                     </UserAddAndMessage>
                   </SeachItem>
                 );
