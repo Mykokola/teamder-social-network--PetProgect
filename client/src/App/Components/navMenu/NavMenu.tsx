@@ -1,6 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
 import {
   NavMenuLinkNavigate,
   LogoNav,
@@ -9,7 +7,10 @@ import {
   LogOutBtn,
   NavMenuContainer,
 } from "./NavMenu.styled";
+import { useCurrentUserQuery } from "../../redux/auth/auth";
 export const NavMenu: React.FC = () => {
+  const {data}:{data:{user:{_id:string}}} = useCurrentUserQuery()
+  const {_id:id} = data.user
   return (
     <NavMenuContainer>
       <nav>
@@ -87,7 +88,7 @@ export const NavMenu: React.FC = () => {
             </NavMenuLinkNavigate>
           </NavMenuItem>
           <NavMenuItem>
-            <NavMenuLinkNavigate to="profile">
+            <NavMenuLinkNavigate to={`profile/${id}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="19"
