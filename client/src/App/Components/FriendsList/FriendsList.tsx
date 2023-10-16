@@ -1,5 +1,4 @@
 import React from "react";
-import avarUser from '../../images/avatarUser.png'
 import { HomePageP,SendMessage,HomeContainer ,HomeHeader,HomeTitle,
     UsersNameandSurname,SeatchFriendTitle,SeachContainer,SeachList,
     SeachItem,SeachImg,UserAddandMessageBtn,AbauthUserContainer,UserAddAndMessage} from "../home/Home.styled";

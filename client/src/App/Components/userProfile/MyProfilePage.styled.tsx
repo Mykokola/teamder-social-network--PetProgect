@@ -29,6 +29,11 @@ export const UserCointainer = styled.div`
 border: 1px solid #3A444C;
 padding: 29px 33px;
 `
+export const LikeBtn = styled.button`
+background: inherit;
+padding: 0;
+margin: 0;
+`
 export const UserBasicInfoContainer = styled.div`
 
 gap: 25px;
@@ -37,6 +42,7 @@ align-items: center;
 `
 export const UserAvatar = styled.img`
 width: 132px;
+border-radius:50%;
 `
 export const UserPsewName = styled.p`
 font-size: 12px;

@@ -9,8 +9,7 @@ import {
 } from "./NavMenu.styled";
 import { useCurrentUserQuery } from "../../redux/auth/auth";
 export const NavMenu: React.FC = () => {
-  const {data}:{data:{user:{_id:string}}} = useCurrentUserQuery()
-  const {_id:id} = data.user
+  const {data}:{data:{user:{_id:any}}} = useCurrentUserQuery()
   return (
     <NavMenuContainer>
       <nav>
@@ -88,7 +87,7 @@ export const NavMenu: React.FC = () => {
             </NavMenuLinkNavigate>
           </NavMenuItem>
           <NavMenuItem>
-            <NavMenuLinkNavigate to={`profile/${id}`}>
+            <NavMenuLinkNavigate to={`profile/${data?.user?._id}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="19"

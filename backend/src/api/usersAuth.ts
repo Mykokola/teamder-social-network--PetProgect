@@ -7,6 +7,8 @@ const gravatar = require('gravatar')
 const {JWT_SECRET} = require('../constants/envConstants')
 const jwt = require('jsonwebtoken')
 
+
+
 const getAllUsers = async (req:Request,res:Response,next:NextFunction) => {
 try{
     const users = await userService.getAllUser()
