@@ -62,7 +62,13 @@ export const authApi: any = createApi({
         method: "PATCH",
         body,
       }),
-
+    }),
+    getUserById:builder.mutation({
+      query: (body) => ({
+        url:"/getUserById",
+        method:"POST",
+        body
+      })
     }),
   }),
 });
@@ -75,5 +81,6 @@ export const {
   useAddFriendMutation,
   useLogoutMutation,
   usePlusLikeMutation,
-  useMinusLikeMutation
+  useMinusLikeMutation,
+  useGetUserByIdMutation
 } = authApi;

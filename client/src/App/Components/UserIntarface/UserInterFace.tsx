@@ -14,7 +14,7 @@ export const UserInterFace: React.FC = () => {
         <Routes>
             <Route path="/" element={<Home></Home>}></Route>
             <Route path="/friends" element={<FriendsList></FriendsList>}></Route>
-            <Route path="/profile" element={<ProfilePage></ProfilePage>}></Route>
+            <Route path="/profile/:id" element={<ProfilePage></ProfilePage>}></Route>
             <Route path="/chat" element={<Chat></Chat>}></Route>
         </Routes>
         <Hastags></Hastags>

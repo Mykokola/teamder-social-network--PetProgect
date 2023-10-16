@@ -10,7 +10,10 @@ background: inherit;
 color: white;
 text-decoration: underline;
 white-space: nowrap;
-
+`
+export const UsersNameandSurname = styled(NavLink)`
+font-size: 19px;
+font-weight: 600;
 
 `
 export const HomePageP = styled.p`

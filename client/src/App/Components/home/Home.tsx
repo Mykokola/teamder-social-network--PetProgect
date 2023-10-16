@@ -10,6 +10,7 @@ import {
   UserSendMessageParagraf,
   HomePageP,
   HomeBtn,
+  UsersNameandSurname,
   HomeContainer,
   HomeHeader,
   HomeTitle,
@@ -53,7 +54,7 @@ export const Home: React.FC = () => {
   return (
     <HomeContainer>
       <HomeHeader>
-        <HomeTitle>Welcome, (USER NAME)!</HomeTitle>
+        <HomeTitle>Welcome, {currentUser?.user?.name}!</HomeTitle>
         <SeatchFriendTitle>Search Friends</SeatchFriendTitle>
         <HomeForm onSubmit={searchUser}>
           <HomeInput
@@ -69,16 +70,18 @@ export const Home: React.FC = () => {
           {filterUsers ? (
             filterUsers.map(
               (
-                { _id, avatarURL, name, surName, bio, login }: UserProfile,
+                { _id:id, avatarURL, name, surName, bio, login }: UserProfile,
                 i: number
               ) => {
                 return (
-                  <SeachItem key={_id}>
+                  <SeachItem key={id}>
+                     <UsersNameandSurname to={`profile/${id}`}>
                     <SeachImg src={avatarURL} alt="" />
+                    </UsersNameandSurname>
                     <AbauthUserContainer>
-                      <h3>
+                      <UsersNameandSurname to={`profile/${id}`}>
                         {name} {surName}
-                      </h3>
+                      </UsersNameandSurname>
                       <HomePageP>{bio}</HomePageP>
                     </AbauthUserContainer>
                     <UserAddAndMessage>

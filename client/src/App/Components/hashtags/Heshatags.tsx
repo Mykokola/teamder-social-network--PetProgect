@@ -10,7 +10,9 @@ import {
   HashtagsItemTitle,
   HashtagsItemParagraf,
 } from "./Hashtags.styled";
+import { useCurrentUserQuery } from "../../redux/auth/auth";
 export const Hastags: React.FC = () => {
+  const {data} = useCurrentUserQuery()
   return (
     <HeshatagsContainer>
       <HashtagTitleContainer>
@@ -19,22 +21,13 @@ export const Hastags: React.FC = () => {
       <HashtagsTableContainer>
         <HashtagsList>
           <HashtagsListTitle>Hashtags for you</HashtagsListTitle>
-          <HashtagsItem>
-            <HashtagsItemTitle>#frontend</HashtagsItemTitle>
-            <HashtagsItemParagraf>1,222 Teams</HashtagsItemParagraf>
-          </HashtagsItem>
-          <HashtagsItem>
-            <HashtagsItemTitle>#frontend</HashtagsItemTitle>
-            <HashtagsItemParagraf>1,222 Teams</HashtagsItemParagraf>
-          </HashtagsItem>
-          <HashtagsItem>
-            <HashtagsItemTitle>#frontend</HashtagsItemTitle>
-            <HashtagsItemParagraf>1,222 Teams</HashtagsItemParagraf>
-          </HashtagsItem>
-          <HashtagsItem>
-            <HashtagsItemTitle>#frontend</HashtagsItemTitle>
-            <HashtagsItemParagraf>1,222 Teams</HashtagsItemParagraf>
-          </HashtagsItem>
+        {data?.user?.interess?.map((interes:string,i:number) => {
+         return( 
+         <HashtagsItem key={i}>
+          <HashtagsItemTitle>{interes}</HashtagsItemTitle>
+        </HashtagsItem>
+        )
+        })}
         </HashtagsList>
       </HashtagsTableContainer>
     </HeshatagsContainer>
