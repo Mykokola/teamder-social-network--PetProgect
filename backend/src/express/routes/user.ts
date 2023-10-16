@@ -15,7 +15,7 @@ router.get('/current/user',auth,authService.currentUser)
 router.post('/logout',auth,authService.logoutUser)
 router.patch('/update/like/plus',auth,authService.updateLike)
 router.patch('/update/like/minus',auth,authService.updateLike)
-
+router.post('/getUserById',auth,authService.getUserById)
 router.use(handlerError)
 
 module.exports = router

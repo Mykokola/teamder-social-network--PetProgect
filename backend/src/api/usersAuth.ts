@@ -17,7 +17,33 @@ try{
     next(e)
 }
 }
+const getUserById = async (req:Request,res:Response,next:NextFunction) => {
+try{
+    const id = req.body?._id
+    const objectIdRegex = /^[0-9a-fA-F]{24}$/;
+    if(!objectIdRegex.test(id)){
+        const error =  createError(ERROR_TYPES.CONFLICT,{
+            message:'_id is not valid'
+        })
+        throw error
+    }
 
+    const user:[{}] = await userService.getUserOption({_id:id})
+    console.log(user)
+
+    if(!user.length){
+        const error =  createError(ERROR_TYPES.NOT_FOUND,{
+            message:'user with this _id not a found'
+        })
+        throw error
+    }
+    res.status(200).json({
+        user
+    })
+}catch(e){
+    next(e)
+}
+}
 const currentUser = (req:Request,res:Response,next:NextFunction) => {
     try{
         const user:{} = req.user[0]
@@ -144,5 +170,6 @@ module.exports = {
     updateLike,
     getAllUsers,
     currentUser,
-    addFriend
+    addFriend,
+    getUserById
 }

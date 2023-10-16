@@ -27,6 +27,33 @@ const getAllUsers = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         next(e);
     }
 });
+const getUserById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    try {
+        const id = (_a = req.body) === null || _a === void 0 ? void 0 : _a._id;
+        const objectIdRegex = /^[0-9a-fA-F]{24}$/;
+        if (!objectIdRegex.test(id)) {
+            const error = createError(ERROR_TYPES.CONFLICT, {
+                message: '_id is not valid'
+            });
+            throw error;
+        }
+        const user = yield userService.getUserOption({ _id: id });
+        console.log(user);
+        if (!user.length) {
+            const error = createError(ERROR_TYPES.NOT_FOUND, {
+                message: 'user with this _id not a found'
+            });
+            throw error;
+        }
+        res.status(200).json({
+            user
+        });
+    }
+    catch (e) {
+        next(e);
+    }
+});
 const currentUser = (req, res, next) => {
     try {
         const user = req.user[0];
@@ -39,9 +66,9 @@ const currentUser = (req, res, next) => {
     }
 };
 const addFriend = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _b;
     try {
-        const friendLogin = (_a = req.body) === null || _a === void 0 ? void 0 : _a.login;
+        const friendLogin = (_b = req.body) === null || _b === void 0 ? void 0 : _b.login;
         const { _id, friends } = req.user[0];
         const friend = yield (userService.getUserOption({ login: friendLogin }));
         const newFrined = JSON.parse(JSON.stringify(friend[0]));
@@ -148,6 +175,7 @@ module.exports = {
     updateLike,
     getAllUsers,
     currentUser,
-    addFriend
+    addFriend,
+    getUserById
 };
 //# sourceMappingURL=usersAuth.js.map
