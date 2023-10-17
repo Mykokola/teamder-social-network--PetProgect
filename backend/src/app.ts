@@ -2,6 +2,7 @@ import express from 'express';
 import * as WebSocket from 'ws';
 import { Server } from 'http';
 import * as http from 'http';
+import { setupSoccetConection } from './webSocket/webSocket';
 
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -22,20 +23,7 @@ app.use(express.static("public"));
 app.use('/auth',user)
 
 
-
-const broadcastMessage = (message) => {
-  const {messages} = message
-  wss.clients.forEach(client => {
-    client.send(JSON.stringify(messages))
-  })
-}
-wss.on('connection', (ws: WebSocket) => {
-  ws.on('message', (message: any) => {
-    message = JSON.parse(message)
-      broadcastMessage(message)
-  });
-
-});
+setupSoccetConection(wss);
 
 
 app.use((req, res) => {

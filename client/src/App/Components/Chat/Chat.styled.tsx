@@ -19,7 +19,10 @@ color: #FFF;
 `
 export const MessageConiter = styled.div``
 export const UserName = styled.h3``
-export const Message = styled.p``
+export const Message = styled.p`
+word-break: break-all;
+white-space: normal;
+`
 export const ChatIntarface = styled.div`
     margin-top: 33px;
     margin-right: 15px;
@@ -32,7 +35,7 @@ overflow: auto;
 margin-top: 22px;
 padding: 22px 28px;
 box-sizing: border-box;
-
+scroll-behavior: smooth;
 &::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 10px;

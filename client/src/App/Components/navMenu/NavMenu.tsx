@@ -18,6 +18,7 @@ export const NavMenu: React.FC = () => {
    const logoutUser = () => {
     logout()
     dispatch(clearToken())
+    localStorage.removeItem('persist:auth')
 }
   const {data}:{data:{user:{_id:any}}} = useCurrentUserQuery()
   return (

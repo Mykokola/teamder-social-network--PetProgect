@@ -1,10 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useRef } from "react";
+import { useEffect } from "react";
+import { useCurrentUserQuery } from "../../redux/auth/auth";
 import { ChatConitaner,MessageConiter,UserName,
     Message,ChatIntarface,SendMassageContainer,SendMassageInput,
     SendMassageBtn,ChatTitle} from "./Chat.styled";
 export const Chat:React.FC = () => {
+    const {data} = useCurrentUserQuery()
     const [messages,setMessages]:any = useState([])
     const [valueMessage,setValueMessage] = useState('')
     const [isConnected, setIsConnected] = useState(true);
@@ -17,8 +20,13 @@ export const Chat:React.FC = () => {
         };
         setIsConnected(false)
     };
-    
+    const scroll = useRef<HTMLDivElement | null>(null)
     const socket = useRef<WebSocket | undefined>()
+    useEffect(() => {
+        if (scroll.current) {
+          scroll.current.scrollTop = scroll.current.scrollHeight;
+        }
+      }, [messages]);
     const sendMessage = () => {
         if (socket.current && valueMessage && socket.current.readyState === WebSocket.OPEN) {
             const message = {
@@ -32,12 +40,12 @@ export const Chat:React.FC = () => {
 
     return(
         <ChatConitaner>
-            <ChatTitle>Write to your friends ;)</ChatTitle>
-            <ChatIntarface>
+            <ChatTitle>Write to new friends ;)</ChatTitle>
+            <ChatIntarface  ref={scroll}>
                 {messages.map((e:string,i:number) => {
                     return(
                         <MessageConiter key={i+1}>
-                        <UserName>Nick</UserName>
+                        <UserName>{data.user.name}</UserName>
                         <Message>{e}</Message>
                     </MessageConiter>
                     )
