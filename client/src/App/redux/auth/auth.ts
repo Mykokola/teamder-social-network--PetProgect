@@ -49,16 +49,9 @@ export const authApi: any = createApi({
         body,
       }),
     }),
-    plusLike: builder.mutation({
+    updateLike: builder.mutation({
       query: (body) => ({
-        url: "/update/like/plus",
-        method: "PATCH",
-        body,
-      }),
-    }),
-    minusLike: builder.mutation({
-      query: (body) => ({
-        url: "/update/like/minus",
+        url: "/update/like",
         method: "PATCH",
         body,
       }),
@@ -80,7 +73,6 @@ export const {
   useAuthUserMutation,
   useAddFriendMutation,
   useLogoutMutation,
-  usePlusLikeMutation,
-  useMinusLikeMutation,
+  useUpdateLikeMutation,
   useGetUserByIdMutation
 } = authApi;

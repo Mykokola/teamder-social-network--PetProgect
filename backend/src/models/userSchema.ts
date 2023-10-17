@@ -52,7 +52,12 @@ const userSchema = new Schema(
         require:[false]
        },
        avatarURL: String,
+       usersWhoLiked:{
+        type:Array,
+        require:[false]
       }
+      },
+    
 )
 
 userSchema.methods.toJSON = function () {

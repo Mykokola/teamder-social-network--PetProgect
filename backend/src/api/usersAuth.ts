@@ -31,7 +31,6 @@ try{
     }
 
     const user:[{}] = await userService.getUserOption({_id:id})
-    console.log(user)
 
     if(!user.length){
         const error =  createError(ERROR_TYPES.NOT_FOUND,{
@@ -156,13 +155,40 @@ const logoutUser = async (req:Request,res:Response,next:NextFunction) => {
         next(e)
     }
 }
-const updateLike = async (req:any,res:Response,next:NextFunction) => {
-        const {_id,likes}:{_id:string,likes:number} = req.user[0]
-        const {path}:{path:string} = req.route
+const updateLike = async (req:Request,res:Response,next:NextFunction) => {
+    try{
+        const {_id:idUserAuth} = req.user[0]
+        const {_id}:{_id:string} =req.body
+        if(!_id){
+            const error = await createError(ERROR_TYPES.BAD_REQUEST,{
+                message:'body is unvalidt'
+            })
+            throw error
+        }
+        const user = await userService.getUserOption({_id})
+        if(!user.length){
+            const error = await createError(ERROR_TYPES.NOT_FOUND,{
+                message:'user is not a found'
+            })
+            throw error
+        }
+      
+        const {likes,usersWhoLiked} = user[0]
         let likesUpdate:number;
-        (path === '/update/like/plus') ? likesUpdate = likes + 1 :likesUpdate = likes - 1
-        const user = await userService.userUpdateById(_id,{likes:likesUpdate})
+        if(usersWhoLiked.includes(idUserAuth)){
+            likesUpdate = likes - 1 
+             usersWhoLiked.splice(usersWhoLiked.indexOf(idUserAuth),1)
+        }else{
+            likesUpdate = likes + 1 
+            usersWhoLiked.push(idUserAuth)
+        }
+        const updateLike = await userService.userUpdateById(_id,{likes:likesUpdate})
+        const updateLiseUsersArry = await userService.userUpdateById(_id,{usersWhoLiked})
+
         res.status(204).json();
+    }catch(e){
+        next(e)
+    }
 }
 
 module.exports = {

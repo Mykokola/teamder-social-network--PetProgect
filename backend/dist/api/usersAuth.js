@@ -39,7 +39,6 @@ const getUserById = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
             throw error;
         }
         const user = yield userService.getUserOption({ _id: id });
-        console.log(user);
         if (!user.length) {
             const error = createError(ERROR_TYPES.NOT_FOUND, {
                 message: 'user with this _id not a found'
@@ -161,12 +160,39 @@ const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 const updateLike = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { _id, likes } = req.user[0];
-    const { path } = req.route;
-    let likesUpdate;
-    (path === '/update/like/plus') ? likesUpdate = likes + 1 : likesUpdate = likes - 1;
-    const user = yield userService.userUpdateById(_id, { likes: likesUpdate });
-    res.status(204).json();
+    try {
+        const { _id: idUserAuth } = req.user[0];
+        const { _id } = req.body;
+        if (!_id) {
+            const error = yield createError(ERROR_TYPES.BAD_REQUEST, {
+                message: 'body is unvalidt'
+            });
+            throw error;
+        }
+        const user = yield userService.getUserOption({ _id });
+        if (!user.length) {
+            const error = yield createError(ERROR_TYPES.NOT_FOUND, {
+                message: 'user is not a found'
+            });
+            throw error;
+        }
+        const { likes, usersWhoLiked } = user[0];
+        let likesUpdate;
+        if (usersWhoLiked.includes(idUserAuth)) {
+            likesUpdate = likes - 1;
+            usersWhoLiked.splice(usersWhoLiked.indexOf(idUserAuth), 1);
+        }
+        else {
+            likesUpdate = likes + 1;
+            usersWhoLiked.push(idUserAuth);
+        }
+        const updateLike = yield userService.userUpdateById(_id, { likes: likesUpdate });
+        const updateLiseUsersArry = yield userService.userUpdateById(_id, { usersWhoLiked });
+        res.status(204).json();
+    }
+    catch (e) {
+        next(e);
+    }
 });
 module.exports = {
     registerUser,

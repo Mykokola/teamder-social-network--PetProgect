@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import LoadingOverlay from 'react-loading-overlay-ts';
-import { usePlusLikeMutation,useMinusLikeMutation } from "../../redux/auth/auth";
+import { useUpdateLikeMutation } from "../../redux/auth/auth";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useGetUserByIdMutation } from "../../redux/auth/auth";
@@ -12,8 +12,6 @@ import { HeaderContainer,ProfileContainer,HeaderTitel,LikeBtn,
     UserInteresContainer,UserNameAndIndenfContainer,UserInteresTitle,UserInteresParagraf} from "./MyProfilePage.styled";
 export const ProfilePage = () => {
   const dispatch = useDispatch()
-  const [plusLike] = usePlusLikeMutation()
-  const [minusLike] = useMinusLikeMutation()
   const [likeStatus,setLikeStatus] = useState(true)
   const {id} = useParams()
   const [getUser,{data,refetch}] = useGetUserByIdMutation()
@@ -24,7 +22,7 @@ export const ProfilePage = () => {
    },[likeStatus])
 //FUNCION
 const updateLike = async () => {
-  likeStatus ? await plusLike() : await minusLike()
+//likeStatus ? await plusLike() : await minusLike()
  await getUser({_id:id})
   setLikeStatus(!likeStatus)
   console.log(likeStatus)
