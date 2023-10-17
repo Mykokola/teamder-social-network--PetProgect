@@ -162,7 +162,7 @@ const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
 const updateLike = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { _id: idUserAuth } = req.user[0];
-        const { _id } = req.body;
+        const { _id, change } = req.body;
         if (!_id) {
             const error = yield createError(ERROR_TYPES.BAD_REQUEST, {
                 message: 'body is unvalidt'
@@ -186,9 +186,16 @@ const updateLike = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
             likesUpdate = likes + 1;
             usersWhoLiked.push(idUserAuth);
         }
-        const updateLike = yield userService.userUpdateById(_id, { likes: likesUpdate });
-        const updateLiseUsersArry = yield userService.userUpdateById(_id, { usersWhoLiked });
-        res.status(204).json();
+        if (change) {
+            const updateLikeS = yield userService.userUpdateById(_id, { likes: likesUpdate });
+            const updateLiseUsersArry = yield userService.userUpdateById(_id, { usersWhoLiked });
+        }
+        else {
+            likesUpdate = likes;
+        }
+        res.status(200).json({
+            likes: likesUpdate
+        });
     }
     catch (e) {
         next(e);

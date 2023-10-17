@@ -158,7 +158,7 @@ const logoutUser = async (req:Request,res:Response,next:NextFunction) => {
 const updateLike = async (req:Request,res:Response,next:NextFunction) => {
     try{
         const {_id:idUserAuth} = req.user[0]
-        const {_id}:{_id:string} =req.body
+        const {_id,change}:{_id:string,change:boolean} =req.body
         if(!_id){
             const error = await createError(ERROR_TYPES.BAD_REQUEST,{
                 message:'body is unvalidt'
@@ -182,10 +182,16 @@ const updateLike = async (req:Request,res:Response,next:NextFunction) => {
             likesUpdate = likes + 1 
             usersWhoLiked.push(idUserAuth)
         }
-        const updateLike = await userService.userUpdateById(_id,{likes:likesUpdate})
+        if(change){
+      
+        const updateLikeS = await userService.userUpdateById(_id,{likes:likesUpdate})
         const updateLiseUsersArry = await userService.userUpdateById(_id,{usersWhoLiked})
-
-        res.status(204).json();
+    }else{
+        likesUpdate = likes
+    }
+        res.status(200).json({
+            likes:likesUpdate
+        });
     }catch(e){
         next(e)
     }
