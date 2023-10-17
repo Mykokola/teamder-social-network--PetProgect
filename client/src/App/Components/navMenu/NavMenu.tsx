@@ -7,8 +7,18 @@ import {
   LogOutBtn,
   NavMenuContainer,
 } from "./NavMenu.styled";
+
+import { useDispatch } from "react-redux";
+import { clearToken } from "../../redux/auth/taskSlice";
+import { useLogoutMutation } from "../../redux/auth/auth";
 import { useCurrentUserQuery } from "../../redux/auth/auth";
 export const NavMenu: React.FC = () => {
+  const [logout] = useLogoutMutation()
+  const dispatch = useDispatch()
+   const logoutUser = () => {
+    logout()
+    dispatch(clearToken())
+}
   const {data}:{data:{user:{_id:any}}} = useCurrentUserQuery()
   return (
     <NavMenuContainer>
@@ -105,8 +115,7 @@ export const NavMenu: React.FC = () => {
           </NavMenuItem>
         </NavMenuList>
       </nav>
-      <LogOutBtn>
-        {" "}
+      <LogOutBtn type="button" onClick={logoutUser}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="21"
@@ -122,7 +131,7 @@ export const NavMenu: React.FC = () => {
             d="M6.0047 0V1.33333H18.6714V18.6667H6.0047V20H20.0047V0H6.0047Z"
             fill="black"
           />
-        </svg>{" "}
+        </svg>
         Log out
       </LogOutBtn>
     </NavMenuContainer>

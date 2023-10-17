@@ -1,19 +1,16 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
-import { useDispatch } from "react-redux";
 import LoadingOverlay from 'react-loading-overlay-ts';
 import { useEffect } from "react";
-import { useState } from "react";
 import { UserLikes } from "./UserLikes";
-import { useGetUserByIdMutation,useUpdateLikeMutation } from "../../redux/auth/auth";
-import { HeaderContainer,ProfileContainer,HeaderTitel,LikeBtn,
+import { useGetUserByIdMutation } from "../../redux/auth/auth";
+import { HeaderContainer,ProfileContainer,HeaderTitel,
     UserCointainer,UserBasicInfoContainer,UserAvatar,
     UserName,UserStatus,UserInfoList,UserInfoItem,UserPsewName,
-    UserInteresContainer,UserNameAndIndenfContainer,UserInteresTitle,UserInteresParagraf} from "./MyProfilePage.styled";
+    UserInteresContainer,UserNameAndIndenfContainer,UserInteresTitle} from "./MyProfilePage.styled";
 export const ProfilePage = () => {
-  const dispatch = useDispatch()
   const {id} = useParams()
-  const [getUser,{data,refetch}] = useGetUserByIdMutation()
+  const [getUser,{data}] = useGetUserByIdMutation()
    useEffect( () => {
     getUser({_id:id})
    },[])

@@ -1,6 +1,5 @@
 import React from "react";
 import { LikeBtn } from "./MyProfilePage.styled";
-import LoadingOverlay from 'react-loading-overlay-ts';
 import { useEffect } from "react";
 import { useUpdateLikeMutation } from "../../redux/auth/auth";
 export const UserLikes:React.FC<{id:any}>  = ({id}) => {
