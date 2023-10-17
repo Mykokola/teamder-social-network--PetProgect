@@ -17,7 +17,9 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) => [
-    ...getDefaultMiddleware(),
+    ...getDefaultMiddleware({serializableCheck: false}),
     authApi.middleware,
   ],
 });
+setupListeners(store.dispatch)
+export const persistor = persistStore(store)

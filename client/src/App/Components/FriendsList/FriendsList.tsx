@@ -5,7 +5,7 @@ import { HomePageP,SendMessage,HomeContainer ,HomeHeader,HomeTitle,
     import { useCurrentUserQuery } from "../../redux/auth/auth";
 export const FriendsList:React.FC = () => {
   const {data}:{data:{user:{friends:[],name:string}}} = useCurrentUserQuery()
-  const {friends,name} = data.user
+  const {friends,name} = data?.user || {friends:[],name:'loading...'}
     return(
   <HomeContainer>
     <HomeHeader>
@@ -14,7 +14,7 @@ export const FriendsList:React.FC = () => {
     </HomeHeader>
     <SeachContainer>
         <SeachList>
-        {friends.map(({_id:id, avatarURL, name, surName, bio, login }) => {
+        { friends ? friends.map(({_id:id, avatarURL, name, surName, bio, login }) => {
           return (
             <SeachItem key={id}>
                <UsersNameandSurname to={`/user/profile/${id}`}>
@@ -31,7 +31,7 @@ export const FriendsList:React.FC = () => {
             </UserAddAndMessage>
             </SeachItem>
           )
-        })}
+        }):<p>loading...</p>}
         </SeachList>
     </SeachContainer>
   </HomeContainer>

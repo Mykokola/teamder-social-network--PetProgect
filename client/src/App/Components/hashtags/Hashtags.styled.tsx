@@ -8,7 +8,7 @@ export const HashtagTitleContainer = styled.div`
   border-bottom: 1px solid #939393;
 `;
 export const HashtagTitle = styled.h2`
-  max-width: 200px;
+width: 155px
   color: #f2f2f2;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Roboto;

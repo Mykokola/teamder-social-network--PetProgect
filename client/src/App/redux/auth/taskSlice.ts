@@ -2,7 +2,7 @@ import React from "react";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    token:''||null,
+    token:'',
     isLogin:false
 }
 const tokenSlice = createSlice({
@@ -14,8 +14,8 @@ const tokenSlice = createSlice({
           state.isLogin = true
         },
         clearToken(state) {
-            state.token = null
-            state.isLogin = false
+            state.token = ''
+             state.isLogin = false
         }
     }
 })
