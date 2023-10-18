@@ -59,7 +59,7 @@ export const Login: React.FC = () => {
         <AuthFormBtn>Login now</AuthFormBtn>
         <AuthParagraf>
           Don’t have an account yet?{" "}
-          <SingUp to="/auth/register">Sign Up</SingUp>
+          <SingUp to="/register">Sign Up</SingUp>
         </AuthParagraf>
       </AuthFomr>
       <ToastContainer />

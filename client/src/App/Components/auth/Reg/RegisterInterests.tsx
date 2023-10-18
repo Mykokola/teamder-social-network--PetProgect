@@ -33,7 +33,7 @@ export const RegisterInterests: React.FC = () => {
   const saveData = async (data: any) => {
     const interess = watch("interests");
     setNewUser({ ...state, ...{ interess } });
-    navigate('/auth/login')
+    navigate('/')
   };
   return (
     <>
@@ -66,7 +66,7 @@ export const RegisterInterests: React.FC = () => {
         </IteresContainer>
         <RegisterNext type="submit">SIGN UP!</RegisterNext>
         <AuthParagraf>
-          You already have an account? <SingUp to="/auth/login">Login</SingUp>
+          You already have an account? <SingUp to="/">Login</SingUp>
         </AuthParagraf>
       </RegForm>
     </>

@@ -12,7 +12,7 @@ function App() {
     <>
       <Routes>
         <Route
-          path="/auth/*"
+          path="/*"
           element={
             <RestrictRoute
               switherTo={false}

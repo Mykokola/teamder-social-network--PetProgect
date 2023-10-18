@@ -38,22 +38,21 @@ export const RegisterBasic: React.FC = () => {
     createErrorRegForm(errors);
   });
 
-  const emailCheck = (userEmail: string) => {
+  const checker = (value: string,checkerKey:string) => {
     const { users } = data;
     const result = users.some(
-      ({ email }: { email: string }) => email === userEmail
+      (element:any) => element[checkerKey] === value
     );
     return result;
   };
-
   const saveData = (data: any) => {
-    const { email } = data;
-    if (!emailCheck(email)) {
+    const { email,login } = data;
+    if (!checker(email,'email')&&!checker(login,'login')) {
       setState({ ...state, ...data });
-      reset();
-      navigate("/auth/register/additional");
+     reset();
+     navigate("/register/additional");
     } else {
-      notify("user with this email is already registered");
+      notify(`user with this ${checker(email,'email')?'emai':'login'}  is already registered `);
     }
   };
   return (
@@ -114,7 +113,7 @@ export const RegisterBasic: React.FC = () => {
 
         <RegisterNext type="submit">CONTINUE</RegisterNext>
         <AuthParagraf>
-          You already have an account? <SingUp to="/auth/login">Login</SingUp>
+          You already have an account? <SingUp to="/">Login</SingUp>
         </AuthParagraf>
       </RegForm>
       <ToastContainer />

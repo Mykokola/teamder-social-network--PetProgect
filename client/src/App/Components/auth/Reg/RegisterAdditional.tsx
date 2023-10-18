@@ -33,13 +33,13 @@ export const RegisterAdditional: React.FC = () => {
     createErrorRegForm(errors);
   });
   const saveData = (data: any) => {
-    const { bio } = data;
+    const { bio }:{bio:string} = data;
     const socialMedia: string[] = [];
     for (let key in data) {
       if (key !== "bio" && data[key]) socialMedia.push(data[key]);
     }
     setState({ ...state, ...{ bio, socialMedia } });
-    navigate("/auth/register/interests");
+    navigate("/register/interests");
     reset();
   };
   return (
