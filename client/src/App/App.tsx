@@ -27,7 +27,7 @@ function App() {
             <RestrictRoute
               switherTo={true}
               component={UserInterFace}
-              redirectTo="/auth/login"
+              redirectTo="/"
             />
           }
         />
