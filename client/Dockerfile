@@ -13,6 +13,9 @@ RUN npm install
 # Копіювання всіх файлів вашого frontend додатку до контейнера
 COPY . .
 
+# Встановлюємо порт клієнта
+EXPOSE 3000
+
 # Виконання команди для збірки вашого frontend додатку (наприклад, npm run build)
 RUN npm run build
 
