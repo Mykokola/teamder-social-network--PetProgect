@@ -7,7 +7,7 @@ export const UserLikes:React.FC<{id:any}>  = ({id}) => {
     const likes = data?.likes >= 0 ? data?.likes : 'loding...'
     useEffect(() => {
         setLike({_id:id})
-    },[])
+    })
     const updateLike = async () => {
         await setLike({_id:id,change:true})
         }

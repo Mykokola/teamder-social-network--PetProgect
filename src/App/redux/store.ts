@@ -1,4 +1,3 @@
-import React from "react";
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import { authApi } from "./auth/auth";

@@ -1,6 +1,5 @@
-import React from "react";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 
 const notify = (message:string) => toast(message);
 export const createErrorRegForm = (errors:any) => {

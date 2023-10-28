@@ -2,7 +2,6 @@ import React from "react";
 import { selectIsLogin } from "../App/redux/auth/selectors";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Cookies from 'js-cookie';
 import { useDispatch } from "react-redux";
 import { setToken } from "../App/redux/auth/taskSlice";
 interface RestrictRouteProps {
