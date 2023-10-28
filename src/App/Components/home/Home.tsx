@@ -42,14 +42,17 @@ export const Home: React.FC = () => {
   const searchUser = (event: React.FormEvent) => {
     event.preventDefault();
     let arryFilter = users.filter((e: any) => {
+        // eslint-disable-next-line
       return e.name.toLowerCase().includes(filter.toLocaleLowerCase());
     });
     setUsersFilter(arryFilter);
   };
   useEffect(() => {
+      // eslint-disable-next-line
     if (JSON.stringify(users) !== JSON.stringify(filterUsers)) {
       setUsersFilter(users);
     }
+      // eslint-disable-next-line
   }, [users]);
   return (
     <HomeContainer>
@@ -59,7 +62,7 @@ export const Home: React.FC = () => {
         <HomeForm onSubmit={searchUser}>
           <HomeInput
             value={filter}
-            onChange={(e) => setFilter(e.target.value)}
+            onChange={(e:any) => setFilter(e.target.value)}
             type="text"
           />
           <HomeBtn type="submit">Search</HomeBtn>

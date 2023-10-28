@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 export const HeshatagsContainer = styled.div`
   grid-area: 1 / 4 / 5 / 5;

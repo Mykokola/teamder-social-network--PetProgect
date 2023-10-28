@@ -26,10 +26,9 @@ export const RegisterInterests: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     watch,
   } = useForm();
-  const [state, setState] = useAppState();
+  const [state] = useAppState();
   const saveData = async (data: any) => {
     const interess = watch("interests");
     setNewUser({ ...state, ...{ interess } });

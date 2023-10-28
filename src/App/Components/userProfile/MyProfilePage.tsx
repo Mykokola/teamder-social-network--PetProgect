@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from 'react-router-dom';
 import LoadingOverlay from 'react-loading-overlay-ts';
 import { useEffect } from "react";
@@ -10,11 +9,14 @@ import { ProfileContainer,
     UserInteresContainer,UserNameAndIndenfContainer,UserInteresTitle} from "./MyProfilePage.styled";
 export const ProfilePage = () => {
   const {id} = useParams()
+  // eslint-disable-next-line
   const [getUser,{data}] = useGetUserByIdMutation()
+  // eslint-disable-next-line
    useEffect( () => {
     getUser({_id:id})
+    // eslint-disable-next-line
    },[])
-
+// eslint-disable-next-line
 //FUNCION
 
    if(data){

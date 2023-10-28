@@ -8,7 +8,6 @@ import {
   HashtagsTableContainer,
   HashtagsItem,
   HashtagsItemTitle,
-  HashtagsItemParagraf,
 } from "./Hashtags.styled";
 import { useCurrentUserQuery } from "../../redux/auth/auth";
 export const Hastags: React.FC = () => {
