@@ -4,7 +4,7 @@ import LoadingOverlay from 'react-loading-overlay-ts';
 import { useEffect } from "react";
 import { UserLikes } from "./UserLikes";
 import { useGetUserByIdMutation } from "../../redux/auth/auth";
-import { HeaderContainer,ProfileContainer,HeaderTitel,
+import { ProfileContainer,
     UserCointainer,UserBasicInfoContainer,UserAvatar,
     UserName,UserStatus,UserInfoList,UserInfoItem,UserPsewName,
     UserInteresContainer,UserNameAndIndenfContainer,UserInteresTitle} from "./MyProfilePage.styled";
@@ -21,10 +21,6 @@ export const ProfilePage = () => {
     const {avatarURL,name,surName,login,bio,interess,city,age} = data.user[0]
     return (
       <ProfileContainer>
-        <HeaderContainer>
-          <HeaderTitel>My profile</HeaderTitel>
-        </HeaderContainer>
-      
       <UserCointainer>
     <UserBasicInfoContainer>
       <UserAvatar src={avatarURL} alt="" />

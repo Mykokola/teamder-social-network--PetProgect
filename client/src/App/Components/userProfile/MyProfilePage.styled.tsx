@@ -52,6 +52,7 @@ export const UserName = styled.h3`
 font-size: 23px;
 `
 export const UserStatus = styled.p`
+word-break: break-all;
 color:#F2F2F2;
 text-align: justify;
 font-family: Manrope;

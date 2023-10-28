@@ -1,7 +1,7 @@
 import React from "react";
 import { HomePageP,SendMessage,HomeContainer ,HomeHeader,HomeTitle,
     UsersNameandSurname,SeatchFriendTitle,SeachContainer,SeachList,
-    SeachItem,SeachImg,UserAddandMessageBtn,AbauthUserContainer,UserAddAndMessage} from "../home/Home.styled";
+    SeachItem,SeachImg,AbauthUserContainer,UserAddAndMessage} from "../home/Home.styled";
     import { useCurrentUserQuery } from "../../redux/auth/auth";
 export const FriendsList:React.FC = () => {
   const {data}:{data:{user:{friends:[],name:string}}} = useCurrentUserQuery()

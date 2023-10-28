@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3001/auth",
+  baseUrl: "https://teamdear-petproject.onrender.com/auth",
   prepareHeaders: (headers, { getState }: { getState: any }) => {
     const token = getState().auth.token;
     if (token) {
